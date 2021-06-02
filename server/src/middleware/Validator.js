@@ -1,10 +1,12 @@
 import Ajv from 'ajv';
 import Log from '../utils/Logger';
 import User from '../models/User';
+import { encrypt } from '../utils/Encryption';
 import { errorRespond } from '../utils/Responder';
 
 async function checkIsNotDuplicate(schema, data) {
   try {
+    data = schema.encrypt ? encrypt(data) : data;
     const userCount = await User.countDocuments({ [schema.name]: data });
     return !userCount;
   } catch (_error) {
@@ -35,12 +37,12 @@ ajValidator.addSchema({
     phoneNumber: {
       type: 'integer',
       validateLength: 9,
-      isNotDuplicate: { name: 'phoneNumber' },
+      isNotDuplicate: { name: 'phoneNumber', encrypt: false },
     },
     ssn: {
       type: 'integer',
       validateLength: 9,
-      isNotDuplicate: { name: 'ssn' },
+      isNotDuplicate: { name: 'ssn', encrypt: true },
     },
   },
   required: ['firstName', 'lastName', 'address', 'phoneNumber', 'ssn'],
