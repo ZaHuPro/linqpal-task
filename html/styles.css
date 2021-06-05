@@ -1,0 +1,69 @@
+body {
+    background-color: #3EB595;
+    font-family: "Palatino"
+}
+
+.form-control {
+    margin: 10px 0;
+    font-family: "Tahoma";
+    color: #3EB595;
+    font-weight: 500;
+}
+.form-control:focus{
+    color: #3EB595;
+    border-color: #efefef;
+    box-shadow: 0 0 0 0.25rem #efefef;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.container-fluid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.content-box{
+    background-color: #fff;
+    border-radius: 10px;
+    min-width: 80%;
+}
+
+.form-side, .text-side {
+    padding: 20px;
+    align-self: center;
+    text-align: center;
+}
+
+
+.btn {
+    font-family: "Trebuchet MS";
+    font-weight: bolder;
+    background-color: #3EB595;
+    color: #fff;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.btn:focus, .btn:hover{
+    color: #fff;
+    background-color: #31997d;
+    border-color: none;
+    box-shadow: none;
+}
+
+thead{
+    color: #fff;
+    background-color: #3EB595;
+    font-family: "Tahoma";
+    font-weight: 0;
+    letter-spacing: 2px;
+} 
+
+tbody {
+    color: #696969;
+}

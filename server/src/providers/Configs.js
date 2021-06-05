@@ -22,7 +22,10 @@ export const API_PREFIX = process.env.API_PREFIX || 'api';
 export const PUBLIC_KEY = process.env.PUBLIC_KEY || readKey('public.pem');
 export const PRIVATE_KEY = process.env.PRIVATE_KEY || readKey('private.pem');
 export const PASS_PHRASE = process.env.PASS_PHRASE || '';
-export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'vYyuKE2z0c';
+export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '123456789';
+export const APP_SECRET = process.env.APP_SECRET || '98uhu5rfs0cve';
+export const AUTH_TOKEN_ALGORITHM = process.env.AUTH_TOKEN_ALGORITHM || 'RS256';
+export const AUTH_TOKEN_EXPIRERS = process.env.AUTH_TOKEN_EXPIRERS || 300;
 
 export default {
   PORT,
@@ -34,4 +37,7 @@ export default {
   PUBLIC_KEY,
   PRIVATE_KEY,
   PASS_PHRASE,
+  APP_SECRET,
+  AUTH_TOKEN_ALGORITHM,
+  AUTH_TOKEN_EXPIRERS,
 };

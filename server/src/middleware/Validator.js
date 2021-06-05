@@ -1,12 +1,10 @@
 import Ajv from 'ajv';
 import Log from '../utils/Logger';
 import User from '../models/User';
-import { encrypt } from '../utils/Encryption';
-import { errorRespond } from '../utils/Responder';
+import { validationRespond } from '../utils/Responder';
 
 async function checkIsNotDuplicate(schema, data) {
   try {
-    data = schema.encrypt ? encrypt(data) : data;
     const userCount = await User.countDocuments({ [schema.name]: data });
     return !userCount;
   } catch (_error) {
@@ -15,7 +13,7 @@ async function checkIsNotDuplicate(schema, data) {
   }
 }
 
-const ajValidator = new Ajv({ allErrors: true, async: true });
+const ajValidator = new Ajv({ allErrors: true, async: true, jsonPointers: true });
 
 ajValidator.addKeyword('isNotDuplicate', {
   async: true,
@@ -35,27 +33,31 @@ ajValidator.addSchema({
     lastName: { type: 'string' },
     address: { type: 'string' },
     phoneNumber: {
-      type: 'integer',
-      validateLength: 9,
-      isNotDuplicate: { name: 'phoneNumber', encrypt: false },
+      type: 'string',
+      validateLength: 12,
+      isNotDuplicate: { name: 'phoneNumber' },
     },
     ssn: {
-      type: 'integer',
-      validateLength: 9,
-      isNotDuplicate: { name: 'ssn', encrypt: true },
+      type: 'string',
     },
   },
   required: ['firstName', 'lastName', 'address', 'phoneNumber', 'ssn'],
   additionalProperties: false,
+  errorMessage: {
+    validateLength: 'This is my custom error message',
+    type: 'This is my custom error message',
+    isNotDuplicate: 'This is my custom error message',
+  },
 }, '/userPOST');
 
 const parseErrors = (validationErrors) => {
   try {
     const { errors } = validationErrors;
     return errors.map((error) => ({
-      param: error.dataPath.slice(1),
+      name: error.dataPath.slice(1),
       key: error.keyword,
-      message: error.message,
+      type: 'manual',
+      message: error.keyword !== 'isNotDuplicate' ? error.message : `This ${error.dataPath.slice(1)} already exist in DB`,
     }));
   } catch (_error) {
     Log.error('parseErrors ::', _error);
@@ -69,8 +71,8 @@ export default async (req, res, next) => {
     .catch((_error) => {
       if (!(_error instanceof Ajv.ValidationError)) {
         Log.error('Validator ::', _error);
-        return errorRespond(res, 'Unexpected error from the server', 500);
+        return validationRespond(res, 'Unexpected error from the server', 500);
       }
-      return errorRespond(res, parseErrors(_error), 400);
+      return validationRespond(res, parseErrors(_error), 400);
     });
 };

@@ -22,14 +22,15 @@ const generateKeys = (_options) => {
   // 2. An object with the properties of the key
   const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
     // The standard secure default length for RSA keys is 2048 bits
-    modulusLength: 2048,
+    modulusLength: 2048, // 4096
+    // namedCurve: 'secp256k1',
     publicKeyEncoding: {
-      type: 'pkcs1',
+      type: 'pkcs1', // spki
       format: 'pem',
     },
     privateKeyEncoding: {
       // first of a family of standards called Public-Key Cryptography Standards
-      type: 'pkcs1',
+      type: 'pkcs1', // pkcs8
       format: 'pem',
       // set of rules used to encode the information
       cipher: 'aes-256-cbc',
