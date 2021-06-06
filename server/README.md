@@ -45,20 +45,7 @@ $ npm run start
 
 // Server is running at 5000 port (can see in the log)
 ```
-## Client Setup   
-In new terminal:   
-```js 
-$ cd client
 
-$ npm i
-
-$ npm run build
-
-$ npm run serve
-
-// Client is running at 3000 port
-// Open http://localhost:3000 in browser
-```
 ## Public and Private KEYS
 ###  Generate Key pair 
 Generates the RSA key pair with ('') passphrase

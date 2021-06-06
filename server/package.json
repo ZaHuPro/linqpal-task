@@ -8,7 +8,8 @@
     "start": "node ./lib",
     "dev": "node -r @babel/register ./src",
     "generate": "node scripts/generateKeyPair.js",
-    "bootstrap": "npm run generate && cp example.env .env"
+    "bootstrap": "npm i && npm run generate && npm run build && cp example.env .env",
+    "bootstrap-win": "npm i && npm run generate && npm run build && copy example.env .env"
   },
   "repository": {
     "type": "git",
