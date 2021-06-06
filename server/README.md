@@ -13,15 +13,17 @@ Follow the below comments to run the server
 
 ### Server setup
 ```js   
-cd /server
+cd server
 
 // In case of running in Mac or Ubuntu Machine
 npm run bootstrap 
 
+// or
+
 // In case of running in Windows Machine
 npm run bootstrap-win
 
-or (manual setup)
+// or (manual setup)
 
 npm i
 npm run generate
@@ -45,7 +47,6 @@ $ npm run start
 
 // Server is running at 5000 port (can see in the log)
 ```
-
 ## Public and Private KEYS
 ###  Generate Key pair 
 Generates the RSA key pair with ('') passphrase
@@ -60,7 +61,7 @@ Generates the RSA key pair with input passphrase
 ```js   
 npm run generate -- -p my-secret-pass
 
-or
+// or
 
 npm run generate -- --passphrase my-secret-pass
 ```
@@ -71,7 +72,7 @@ npm run generate -- --passphrase my-secret-pass
 ```js   
 npm run generate -- -h
 
-or
+// or
 
 npm run generate -- --help
 ```

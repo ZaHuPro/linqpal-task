@@ -13,15 +13,17 @@ Follow the below comments to run the server
 
 ### Server setup
 ```js   
-cd /server
+cd server
 
 // In case of running in Mac or Ubuntu Machine
 npm run bootstrap 
 
+// or
+
 // In case of running in Windows Machine
 npm run bootstrap-win
 
-or (manual setup)
+// or (manual setup)
 
 npm i
 npm run generate
@@ -45,19 +47,36 @@ $ npm run start
 
 // Server is running at 5000 port (can see in the log)
 ```
-## Client Setup   
+## Client
+Follow the below comments to run the react client
+### Client setup
 In new terminal:   
 ```js 
 $ cd client
 
-$ npm i
+// In case of running in Mac or Ubuntu Machine
+npm run bootstrap 
 
-$ npm run build
+// or
 
-$ npm run serve
+// In case of running in Windows Machine
+npm run bootstrap-win
+
+// or (manual setup)
+
+npm i
+// Copy the example.env to .env
+npm run build
+
+```
+### Start the Client
+```js   
+
+npm run serve
 
 // Client is running at 3000 port
 // Open http://localhost:3000 in browser
+
 ```
 ## Public and Private KEYS
 ###  Generate Key pair 
@@ -73,7 +92,7 @@ Generates the RSA key pair with input passphrase
 ```js   
 npm run generate -- -p my-secret-pass
 
-or
+// or
 
 npm run generate -- --passphrase my-secret-pass
 ```
@@ -84,7 +103,7 @@ npm run generate -- --passphrase my-secret-pass
 ```js   
 npm run generate -- -h
 
-or
+// or
 
 npm run generate -- --help
 ```
